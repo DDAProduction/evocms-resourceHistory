@@ -16,8 +16,8 @@ class SiteContentHistory extends Eloquent\Model
 
     protected $fillable = [
         'resource_id',
-        'content',
-        'other_data',
+        'document_object',
+        'post_data',
         'notice',
 
     ];
