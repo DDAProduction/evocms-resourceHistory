@@ -19,7 +19,7 @@ class CreateSiteContentHistoryTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->integer('resource_id')->default(0)->index('resource_history_id');
-			$table->longText('document_object')->default();
+			$table->longText('document_object')->nullable();
 			$table->longText('post_data')->nullable();
 			$table->text('notice')->nullable();
 			$table->timestamps();
