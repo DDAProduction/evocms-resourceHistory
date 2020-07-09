@@ -1,0 +1,24 @@
+{
+  "name": "ddaproduction/evocms-resourcehistory",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexander Pashkevich",
+      "email": "sertious2008.work3@gmail.com"
+    }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "EvolutionCMS\\EvocmsHistoryDoc\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "EvolutionCMS\\EvocmsHistoryDoc\\EvocmsHistoryDocServiceProvider"
+      ]
+    }
+  }
+}
