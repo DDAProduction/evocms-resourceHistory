@@ -36,7 +36,7 @@ Event::listen('evolution.OnAfterLoadDocumentObject', function ($params) {
 Event::listen('evolution.OnDocFormRender', function ($params) {
     $modx = EvolutionCMS();
     $modx->event->params = $params;
-    $modx->event->params['documents'] = 1;
+    $modx->event->params['templates'] = $modx->getConfig('docHistoryTemplateConfig');
 
     global $richtexteditorIds;
     //Hack to check if TinyMCE scripts are loaded

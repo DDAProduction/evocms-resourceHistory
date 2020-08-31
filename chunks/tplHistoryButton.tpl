@@ -1,0 +1,1 @@
+<a href="[+history_link+]" class="btn btn-primary" style="margin: 2px" target="_blank">Просмотреть [+lang+]</a>

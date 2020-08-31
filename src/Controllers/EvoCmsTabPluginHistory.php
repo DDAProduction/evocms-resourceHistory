@@ -15,6 +15,7 @@ class EvoCmsTabPluginHistory extends Plugin
     public $tpl = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/history.tpl';
     public $tplRow = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/historyrow.tpl';
     public $tplTable = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/table.tpl';
+    public $tplHistoryButton = 'core/custom/packages/evocmsHistoryDoc/chunks/tplHistoryButton.tpl';
 
     /**
      * @return array
@@ -26,13 +27,23 @@ class EvoCmsTabPluginHistory extends Plugin
         $tplRow = file_get_contents(MODX_BASE_PATH . $this->tplRow);
         $tplTable = file_get_contents(MODX_BASE_PATH . $this->tplTable);
         $tplEmpty = file_get_contents(MODX_BASE_PATH . $this->tplEmpty);
+        $tplHistoryButton = file_get_contents(MODX_BASE_PATH . $this->tplHistoryButton);
         if ($historyDoc->count() > 0) {
             $n = 0;
             foreach ($historyDoc->get()->toArray() as $row) {
                 $row['n'] = ++$n;
                 $row['pagetitle'] = json_decode($row['document_object'], true)['pagetitle'];
-                $row['history_link'] =\UrlProcessor::makeUrl($row['resource_id'], '', 'history_doc='.$row['id']);
-                $row['repair_link'] = '?check_repair=repair_'.md5($row['id'].$row['resource_id']).'&resource_id='.$row['resource_id'].'&doc_id='.$row['id'];
+                $languages = config('app.blang.languages');
+                if (!is_null($languages)) {
+                    foreach (explode('||', $languages) as $lang) {
+                        $row_lang['history_link'] = '/'.$lang.\UrlProcessor::makeUrl($row['resource_id'], '', 'history_doc=' . $row['id']);
+                        $row_lang['lang'] = $lang;
+                        $row['historyButton']  .=  $this->DLTemplate->parseChunk('@CODE:' . $tplHistoryButton, $row_lang);
+                    }
+                } else {
+                    $row['history_link'] = \UrlProcessor::makeUrl($row['resource_id'], '', 'history_doc=' . $row['id']);
+                    $row['historyButton']  =  $this->DLTemplate->parseChunk('@CODE:' . $tplHistoryButton, $row);
+                }
                 $_SESSION['available_repair'][] = md5($row['id'].$row['resource_id']);
                 $innerTable .= $this->DLTemplate->parseChunk('@CODE:' . $tplRow, $row);
             }
