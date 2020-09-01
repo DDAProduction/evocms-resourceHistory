@@ -15,7 +15,7 @@ class EvoCmsTabPluginHistory extends Plugin
     public $tpl = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/history.tpl';
     public $tplRow = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/historyrow.tpl';
     public $tplTable = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/table.tpl';
-    public $tplHistoryButton = 'core/custom/packages/evocmsHistoryDoc/chunks/tplHistoryButton.tpl';
+    public $tplHistoryButton = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/tplHistoryButton.tpl';
 
     /**
      * @return array
