@@ -17,6 +17,10 @@ Event::listen('evolution.OnManagerPageInit', function ($params) {
         if (in_array($check, $_SESSION['available_repair'])) {
             $prePost = \EvolutionCMS\EvocmsHistoryDoc\Models\SiteContentHistory::find($_GET['doc_id'])->post_data;
             $_POST = json_decode($prePost, true);
+            if($_POST['id'] == 0) {
+				$_POST['id'] = $_GET['resource_id'];
+				$_POST['mode'] = 27;
+			}
             $_REQUEST['id'] = $_POST['id'];
             define('IN_MANAGER_MODE', true);
 
