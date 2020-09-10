@@ -44,6 +44,7 @@ class EvoCmsTabPluginHistory extends Plugin
                     $row['history_link'] = \UrlProcessor::makeUrl($row['resource_id'], '', 'history_doc=' . $row['id']);
                     $row['historyButton']  =  $this->DLTemplate->parseChunk('@CODE:' . $tplHistoryButton, $row);
                 }
+                $row['repair_link'] = '?check_repair=repair_'.md5($row['id'].$row['resource_id']).'&resource_id='.$row['resource_id'].'&doc_id='.$row['id'];
                 $_SESSION['available_repair'][] = md5($row['id'].$row['resource_id']);
                 $innerTable .= $this->DLTemplate->parseChunk('@CODE:' . $tplRow, $row);
             }
