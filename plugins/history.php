@@ -3,14 +3,16 @@
 Event::listen('evolution.OnDocFormSave', function ($params) {
     if (!isset($_GET['check_repair'])) {
         $modx = EvolutionCMS();
-        $docObj = $modx->makeDocumentObject($params['id']);
-        \EvolutionCMS\EvocmsHistoryDoc\Models\SiteContentHistory::create(['resource_id' => $params['id'], 'document_object' => json_encode($docObj, JSON_UNESCAPED_UNICODE), 'post_data' => json_encode($_POST, JSON_UNESCAPED_UNICODE)]);
+        if (is_numeric($params['id']) && $params['id'] > 0) {
+            $docObj = $modx->makeDocumentObject($params['id']);
+            \EvolutionCMS\EvocmsHistoryDoc\Models\SiteContentHistory::create(['resource_id' => $params['id'], 'document_object' => json_encode($docObj, JSON_UNESCAPED_UNICODE), 'post_data' => json_encode($_POST, JSON_UNESCAPED_UNICODE)]);
+        }
     }
 });
 
 Event::listen('evolution.OnManagerPageInit', function ($params) {
 
-    if (stristr($_GET['check_repair'], 'repair_') && isset($_GET['resource_id']) && isset($_GET['doc_id'])) {
+    if (isset($_GET['check_repair']) && stristr($_GET['check_repair'], 'repair_') && isset($_GET['resource_id']) && isset($_GET['doc_id'])) {
 
         $check = str_replace('repair_', '', $_GET['check_repair']);
 

@@ -15,6 +15,7 @@ class EvoCmsTabPluginHistory extends Plugin
     public $tpl = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/history.tpl';
     public $tplRow = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/historyrow.tpl';
     public $tplTable = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/table.tpl';
+    public $tplEmpty = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/table.tpl';
     public $tplHistoryButton = 'core/vendor/ddaproduction/evocms-resourcehistory/chunks/tplHistoryButton.tpl';
 
     /**
@@ -35,6 +36,7 @@ class EvoCmsTabPluginHistory extends Plugin
                 $row['pagetitle'] = json_decode($row['document_object'], true)['pagetitle'];
                 $languages = config('app.blang.languages');
                 if (!is_null($languages)) {
+                    $row['historyButton'] = '';
                     foreach (explode('||', $languages) as $lang) {
                         $row_lang['history_link'] = '/'.$lang.\UrlProcessor::makeUrl($row['resource_id'], '', 'history_doc=' . $row['id']);
                         $row_lang['lang'] = $lang;
