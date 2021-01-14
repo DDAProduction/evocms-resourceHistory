@@ -72,6 +72,11 @@ class EvoCmsTabPluginHistory extends Plugin
         return array_merge($this->params, $ph);
     }
 
+    
+    public function renderJS($list, $ph = array())
+    {
+        return '';
+    }
 
     public function checkTable()
     {
