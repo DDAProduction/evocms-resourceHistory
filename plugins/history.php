@@ -4,7 +4,7 @@ Event::listen('evolution.OnDocFormSave', function ($params) {
     if (!isset($_GET['check_repair'])) {
         $modx = EvolutionCMS();
         if (is_numeric($params['id']) && $params['id'] > 0) {
-            $docObj = $modx->makeDocumentObject($params['id']);
+            $docObj = $modx->getDocumentObject('id', $params['id']);
             \EvolutionCMS\EvocmsHistoryDoc\Models\SiteContentHistory::create(['resource_id' => $params['id'], 'document_object' => json_encode($docObj, JSON_UNESCAPED_UNICODE), 'post_data' => json_encode($_POST, JSON_UNESCAPED_UNICODE)]);
         }
     }
